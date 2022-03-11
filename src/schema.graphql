@@ -1,0 +1,72 @@
+type BaseToken {
+  address: String!
+  name: String!
+  symbol: String!
+}
+
+type QuoteToken {
+  symbol: String!
+}
+
+type BuySell {
+  buys: Float!
+  sells: Float!
+}
+
+type Transactions {
+  m5: BuySell!
+  h1: BuySell!
+  h6: BuySell!
+  h24: BuySell!
+}
+
+type PriceChange {
+  m5: Float!
+  h1: Float!
+  h6: Float!
+  h24: Float!
+}
+
+type Liquidity {
+  usd: Float
+  base: Float!
+  quote: Float!
+}
+
+type Pair {
+  chainId: String!
+  dexId: String!
+  url: String!
+  pairAddress: String!
+  baseToken: BaseToken!
+  quoteToken: QuoteToken!
+  priceNative: String!
+  priceUsd: String
+  txns: Transactions!
+  volume: PriceChange!
+  priceChange: PriceChange!
+  liquidity: Liquidity!
+  fdv: Float
+  pairCreatedAt: Float!
+}
+
+type Search {
+  schemaVersion: String!
+  pairs: [Pair!]!
+}
+
+type Pairs {
+  schemaVersion: String!
+  pair: Pair!
+}
+
+type Tokens {
+  schemaVersion: String!
+  pairs: [Pair!]!
+}
+
+type Query {
+  search: Search!
+  pairs: Pairs!
+  tokens: Tokens!
+}
